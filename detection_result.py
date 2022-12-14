@@ -37,6 +37,6 @@ class DetectionResultContainer:
         with open(file_name, 'rb') as f:
             self.res = pickle.load(f)
 
-    def merge(seif, other_container):
+    def merge(self, other_container):
         self.res.extend(other_container.res) 
 
