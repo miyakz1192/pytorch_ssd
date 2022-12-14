@@ -12,6 +12,7 @@ import cv2
 from ssd import build_ssd
 from matplotlib import pyplot as plt
 from data import VOC_CLASSES as voc_labels
+from detection_result import *
 
 # GPUの設定
 torch.cuda.is_available() 
@@ -26,8 +27,11 @@ net.load_weights('./weights/close_weight.pth')
 #net.load_weights('./weights/good_backup/20221212/close_weight.pth')
 net = net.to(device)
 
+
 # 物体検出関数 
 def detect(image, labels):
+
+    res = DetectionResultContainer()
 
     # 画像を(1,3,300,300)のテンソルに変換
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -69,11 +73,12 @@ def detect(image, labels):
             color = colors[i]
             currentAxis.add_patch(plt.Rectangle(*coords, fill=False, edgecolor=color, linewidth=2))
             currentAxis.text(pt[0], pt[1], display_txt, bbox={'facecolor':color, 'alpha':0.5})
+            res.add(label_name, score, coords)
             j+=1
     #plt.show()
     plt.savefig("./result.jpg")
     plt.close()
-    return detections
+    return res
 
 # 物体検出実行
 #file = './data/person.jpg'
@@ -82,4 +87,8 @@ def detect(image, labels):
 #file = './VOCdevkit/BCCD/JPEGImages/BloodImage_00000.jpg'
 file = sys.argv[1]
 image = cv2.imread(file, cv2.IMREAD_COLOR) 
-detections = detect(image, voc_labels)
+res = detect(image, voc_labels)
+
+res.sort_by_score()
+res.print()
+res.save("result_data.pickle")
