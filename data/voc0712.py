@@ -25,7 +25,7 @@ else:
 
 BCCD_CLASSES = ('rbc', 'wbc', 'platelets')
 
-VOC_CLASSES = ('aeroplane', 'bicycle', 'bird', 'boat',
+VOC_CLASSES = ('aeroplane', 'close', 'bird', 'boat',
            'bottle', 'bus', 'car', 'cat', 'chair',
            'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant',
