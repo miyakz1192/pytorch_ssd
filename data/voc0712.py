@@ -23,13 +23,13 @@ if sys.version_info[0] == 2:
 else:
     import xml.etree.ElementTree as ET
 
-BCCD_CLASSES = ('rbc', 'wbc', 'ja_char')
+BCCD_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char')
 
-VOC_CLASSES = ('aeroplane', 'close', 'ja_char', 'boat',
-           'bottle', 'bus', 'car', 'cat', 'chair',
+VOC_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char',
+           'car', 'cat', 'chair',
            'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor')
+           'sheep', 'sofa', 'train', 'tvmonitor', 'aeroplane')
 
 # handbook
 # note: if you used our download scripts, this should be right
