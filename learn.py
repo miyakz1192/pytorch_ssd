@@ -20,10 +20,8 @@ warnings.filterwarnings('ignore')
 args = {'dataset':'close_weight',   
         'basenet':'vgg16_reducedfc.pth',
         'batch_size':32,
-#        'resume':'ssd300_mAP_77.43_v2.pth',
-#        'resume':'close_weight_20221212.pth',
-        'resume':'close_weight.pth',
-#        'max_iter':10,
+        'resume':'ssd300_mAP_77.43_v2.pth',
+        #'resume':'good_backup/close_weight_0.4379034004363406_20221227.pth',
         'max_iter':500,
         'num_workers':4,  
         'cuda':True,
@@ -51,6 +49,8 @@ cfg = voc
 dataset = VOCDetection(root=VOC_ROOT,
                        transform=SSDAugmentation(cfg['min_dim'],
                                                  MEANS))
+
+print("INFO: num_classes = %d" % (cfg["num_classes"]))
 
 # ネットワークの定義
 ssd_net = build_ssd('train', cfg['min_dim'], cfg['num_classes'])
