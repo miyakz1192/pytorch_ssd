@@ -23,9 +23,9 @@ if sys.version_info[0] == 2:
 else:
     import xml.etree.ElementTree as ET
 
-BCCD_CLASSES = ('closeedged', 'closee1', 'closee2', 'closee3' ,'closee4', 'closee5', 'ja_char')
+BCCD_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char')
 
-VOC_CLASSES = ('closeedged', 'closee1', 'closee2', 'closee3' ,'closee4', 'closee5', 'ja_char',
+VOC_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char',
            'car', 'cat', 'chair',
            'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant',
