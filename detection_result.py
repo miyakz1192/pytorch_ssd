@@ -11,6 +11,11 @@ class DetectionResultRectangle:
         self.width  = first_layer[1]
         self.height = first_layer[2]
 
+        self.x      = int(self.x)
+        self.y      = int(self.y)
+        self.width  = int(self.width)
+        self.height = int(self.height)
+
     def to_s(self):
         x = int(self.x)
         y = int(self.y)
