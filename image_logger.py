@@ -13,7 +13,7 @@ import uuid
 
 
 class ImageLogger:
-	def __init__(self, log_dir_name):
+	def __init__(self, log_dir_name="image_log"):
 		self.log_dir_name = log_dir_name
 
 	def log(self, image_file, detection_result_file):
@@ -40,7 +40,6 @@ class ImageLogger:
 			temp = image[r.y:r.y+r.height, r.x:r.x+r.width, :]
 			score = str(int(d.score * 100))
 			cv2.imwrite(dir_name + "/%s_%s_%d.jpg" % (d.label, score, i),temp)
-			d.print()
 
 
 if __name__ == "__main__":
