@@ -13,6 +13,7 @@ from ssd import build_ssd
 from matplotlib import pyplot as plt
 from data import VOC_CLASSES as voc_labels
 from detection_result import *
+from image_logger import *
 
 # GPUの設定
 torch.cuda.is_available() 
@@ -89,10 +90,15 @@ net = net.to(device)
 #file = './data/bccd.jpg'
 #file = './data/BloodImage_00219.jpg'
 #file = './VOCdevkit/BCCD/JPEGImages/BloodImage_00000.jpg'
-file = sys.argv[2]
+file = sys.argv[2] #edged input
+org_file = sys.argv[3] # original input
 image = cv2.imread(file, cv2.IMREAD_COLOR) 
 res = detect(image, voc_labels)
 
 res.sort_by_score()
 res.print()
-res.save("result_data.pickle")
+result_data_file = "result_data.pickle"
+res.save(result_data_file)
+
+im_log = ImageLogger()
+im_log.log(org_file,result_data_file) 
