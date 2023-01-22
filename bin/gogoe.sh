@@ -15,7 +15,7 @@ do
 	echo "file==>" $line
 	./bin/edged.py ${line}
 	cp ${line} ./target.jpg
-   	python3 predict.py ${weight} ./edged.jpg
+   	python3 predict.py ${weight} ./edged.jpg ${line}
 	echo "hit enter file==>" $line
-	read -p "Hit enter: ==>"
+#	read -p "Hit enter: ==>"
 done
