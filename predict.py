@@ -102,3 +102,5 @@ res.save(result_data_file)
 
 im_log = ImageLogger()
 im_log.log(org_file,result_data_file) 
+
+print("IMAGE_LOG=%s" % (im_log.log_dir_target_name))

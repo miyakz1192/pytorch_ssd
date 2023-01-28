@@ -29,6 +29,7 @@ class DetectionResult:
         self.label = label
         self.score = score
         self.rect = DetectionResultRectangle(rect_taple)
+        self.file_name = None
 
     def print(self):
         #http://www.mwsoft.jp/programming/numpy/rectangle.html

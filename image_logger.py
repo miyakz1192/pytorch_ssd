@@ -10,11 +10,13 @@ if module_path not in sys.path:
 from detection_result import *
 
 import uuid
+import datetime
 
 
 class ImageLogger:
 	def __init__(self, log_dir_name="image_log"):
 		self.log_dir_name = log_dir_name
+		self.log_dir_target_name = None
 
 	def log(self, image_file, detection_result_file):
 		#check logging dir exists
@@ -23,7 +25,9 @@ class ImageLogger:
 			os.mkdir(self.log_dir_name)
 
 		#generate uuid
-		dir_name = self.log_dir_name + "/" + str(uuid.uuid4()) 
+		dir_name =  self.log_dir_name + "/" + datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+		#dir_name = self.log_dir_name + "/" + str(uuid.uuid4()) 
+		self.log_dir_target_name = dir_name
 		#check logging dir exists
 		if not os.path.exists(dir_name):
 			os.mkdir(dir_name)
@@ -39,8 +43,12 @@ class ImageLogger:
 			r = d.rect
 			temp = image[r.y:r.y+r.height, r.x:r.x+r.width, :]
 			score = str(int(d.score * 100))
-			cv2.imwrite(dir_name + "/%s_%s_%d.jpg" % (d.label, score, i),temp)
+			file_name = self.log_dir_target_name + "/%s_%s_%d.jpg" % (d.label, score, i)
+			cv2.imwrite(file_name, temp)
+			d.file_name = file_name
 
+		dres.save(self.log_dir_target_name + "/" + "result_data.pickle")
+		return dres
 
 if __name__ == "__main__":
 	print("INFO: mini test")
