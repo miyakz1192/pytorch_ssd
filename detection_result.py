@@ -16,6 +16,10 @@ class DetectionResultRectangle:
         self.width  = int(self.width)
         self.height = int(self.height)
 
+        if self.x < 0: self.x = 0
+        if self.y < 0: self.y = 0
+		
+
     def to_s(self):
         x = int(self.x)
         y = int(self.y)
@@ -35,7 +39,7 @@ class DetectionResult:
         #http://www.mwsoft.jp/programming/numpy/rectangle.html
         #rect = ((55.251713, 151.57387), 71.9019775390625, 68.363525390625)
         #            x     ,   y       ,  width          ,   height
-        print("DETECT: %s(%.2f), %s" % (self.label, self.score, self.rect.to_s()))
+        print("DETECT: %s(%.2f), %s %s" % (self.label, self.score, self.rect.to_s(), self.file_name))
 
 
 class DetectionResultContainer:
