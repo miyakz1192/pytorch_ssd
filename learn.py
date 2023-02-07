@@ -15,9 +15,11 @@ import numpy as np
 import argparse
 import warnings  
 warnings.filterwarnings('ignore')  
+import pathlib
+
 
 # 初期設定
-args = {'dataset':'close_weight',   
+args = {'dataset':'best_weight',   
         'basenet':'vgg16_reducedfc.pth',
         'batch_size':32,
         'resume':'ssd300_mAP_77.43_v2.pth',
@@ -163,13 +165,14 @@ for iteration in range(args['max_iter']):
         if best_file_name != None:
             os.remove(best_file_name)
         torch.save(ssd_net.state_dict(),
-            args['save_folder'] + '' + args['dataset'] + "_" + str(best_loss)+'.pth')
-        best_file_name = args['save_folder'] + '' + args['dataset'] + "_" + str(best_loss)+'.pth'
+            args['save_folder'] + '' + args['dataset'] + '.pth')
+        best_file_name = args['save_folder'] + '' + args['dataset'] + "_" + str(best_loss)+'_loss.txt'
+        pathlib.Path(best_file_name).touch()
 
 
     sys.stdout.flush()
 
 
 # 学習済みモデルの保存
-torch.save(ssd_net.state_dict(),
-           args['save_folder'] + '' + args['dataset'] + '.pth')
+#torch.save(ssd_net.state_dict(),
+#           args['save_folder'] + '' + args['dataset'] + '.pth')
