@@ -23,13 +23,27 @@ if sys.version_info[0] == 2:
 else:
     import xml.etree.ElementTree as ET
 
-BCCD_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char')
+from .class_def import *
 
-VOC_CLASSES = ('close', 'closebcow', 'closegb', 'closewcobfat' ,'closewcolg', 'ja_char',
-           'car', 'cat', 'chair',
-           'cow', 'diningtable', 'dog', 'horse',
-           'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor', 'aeroplane')
+BCCD_CLASSES = SSD_IDENTIFY_CLASSES
+
+#VOC_CLASSES = BCCD_CLASSES + ('car', 'cat', 'chair',
+#           'cow', 'diningtable', 'dog', 'horse',
+#           'motorbike', 'person', 'pottedplant',
+#           'sheep', 'sofa', 'train', 'tvmonitor', 'aeroplane')
+#
+
+VOC_CLASSES = SSD_IDENTIFY_CLASSES
+#fulfill VOC_CLASSES
+for i in range(21-len(SSD_IDENTIFY_CLASSES)):
+	#last "," means tuple
+	VOC_CLASSES += ("def%s" % (str(i)),)
+
+print("INFO: show classes")
+print(BCCD_CLASSES)
+print(len(BCCD_CLASSES))
+print(VOC_CLASSES)
+print(len(VOC_CLASSES))
 
 # handbook
 # note: if you used our download scripts, this should be right
